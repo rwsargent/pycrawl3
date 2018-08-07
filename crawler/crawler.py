@@ -43,8 +43,9 @@ def get_url_response(url):
     print("Processing %s" % url)
     try:
         response = requests.get(url, timeout=3)
-    except requests.exceptions.RequestException:
-        response = requests.Response()
+    except requests.exceptions.RequestException as e:
+        print("{} failed: {}".format(url, str(e)))
+        response = None
     return response
 
 @timeout(seconds=2)
@@ -78,7 +79,7 @@ def crawl(links):
         url_extras = get_url_extras(url1)
 
         response = get_url_response(url1)
-        if not response.ok:
+        if not response or not response.ok:
             continue
 
         try:
