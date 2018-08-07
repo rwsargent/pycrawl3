@@ -1,7 +1,7 @@
 import logging
 import re
 from collections import deque
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 import requests
 import requests.exceptions
